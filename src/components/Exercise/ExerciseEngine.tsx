@@ -29,9 +29,12 @@ function ExerciseCard({ exercise, onResult }: { exercise: Exercise; onResult: (c
 }
 
 export function ExerciseEngine({ module, reviewMode, missedIds, onResult }: Props) {
-  const exercises: Exercise[] = reviewMode && missedIds?.length
-    ? module.exercises.filter((e) => missedIds.includes(e.id))
-    : module.exercises;
+  // Snapshot the list once at mount so answers during the session don't mutate it.
+  const [exercises] = useState<Exercise[]>(() =>
+    reviewMode && missedIds?.length
+      ? module.exercises.filter((e) => missedIds.includes(e.id))
+      : module.exercises
+  );
 
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<{ id: string; correct: boolean }[]>([]);
@@ -41,20 +44,24 @@ export function ExerciseEngine({ module, reviewMode, missedIds, onResult }: Prop
   const current = exercises[index];
   const score = results.filter((r) => r.correct).length;
 
+  // Use a ref to guard against double-firing without stale closure issues.
+  const answeredRef = useRef(false);
   const handleResult = useCallback(
     (correct: boolean) => {
-      if (answered) return;
+      if (answeredRef.current) return;
+      answeredRef.current = true;
       setAnswered(true);
       setResults((prev) => [...prev, { id: current.id, correct }]);
       onResult(current.id, correct);
     },
-    [answered, current?.id, onResult]
+    [current?.id, onResult]
   );
 
   const handleNext = () => {
     if (index + 1 >= exercises.length) {
       setDone(true);
     } else {
+      answeredRef.current = false;
       setIndex((i) => i + 1);
       setAnswered(false);
     }
