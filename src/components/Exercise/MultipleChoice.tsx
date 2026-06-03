@@ -10,7 +10,6 @@ interface Props {
 export function MultipleChoice({ exercise, onResult }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
   const submitted = selected !== null;
-  const correct = selected === exercise.correct;
 
   const handleSelect = (i: number) => {
     if (submitted) return;

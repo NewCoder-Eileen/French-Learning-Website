@@ -21,7 +21,6 @@ export function AuxiliaryChoice({ exercise, onResult }: Props) {
   }, [exercise.id]);
 
   const auxResult = submitted ? checkAnswer(aux, exercise.auxAccepted) : null;
-  const allCorrect = auxResult?.status === 'correct';
 
   const handleSubmit = () => {
     if (!aux) return;
