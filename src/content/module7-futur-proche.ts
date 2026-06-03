@@ -1,0 +1,130 @@
+import type { Module } from './types';
+
+const module: Module = {
+  id: 'module7',
+  slug: 'futur-proche',
+  title: 'Futur Proche vs Futur Simple',
+  subtitle: 'Near future (aller + inf.) vs simple future',
+  color: 'bg-green-600',
+  icon: '⏳',
+  reference: [
+    {
+      title: 'Two Futures Compared',
+      body: 'French has two common ways to express the future. Choose based on immediacy and certainty.',
+      tables: [
+        {
+          title: 'Futur Proche vs Futur Simple',
+          headers: ['', 'Futur Proche', 'Futur Simple'],
+          rows: [
+            { label: 'Formation', cells: ['aller (présent) + infinitive', 'infinitive + future endings'] },
+            { label: 'Usage', cells: ['Near, planned, imminent future', 'Distant, formal, conditional future'] },
+            { label: 'Example (go)', cells: ['Je vais partir.', 'Je partirai.'] },
+            { label: 'Feel', cells: ['I\'m going to leave (soon).', 'I will leave (someday).'] },
+          ],
+        },
+        {
+          title: 'aller (présent) — for futur proche',
+          headers: ['Person', 'Form'],
+          rows: [
+            { label: 'je', cells: ['vais'] },
+            { label: 'tu', cells: ['vas'] },
+            { label: 'il / elle / on', cells: ['va'] },
+            { label: 'nous', cells: ['allons'] },
+            { label: 'vous', cells: ['allez'] },
+            { label: 'ils / elles', cells: ['vont'] },
+          ],
+        },
+      ],
+      rules: [
+        'Futur proche: aller (conjugated) + infinitive of the action verb.',
+        'Futur simple: use the stem + endings (-ai, -as, -a, -ons, -ez, -ont).',
+        'Clue words for futur proche: ce soir, demain matin, tout à l\'heure, bientôt.',
+        'Clue words for futur simple: un jour, l\'année prochaine, si + présent, dans dix ans.',
+      ],
+    },
+  ],
+  exercises: [
+    {
+      type: 'translate',
+      id: 'm7-t1',
+      prompt: 'I will start a healthy and balanced diet. (futur simple)',
+      accepted: ['Je commencerai un régime sain et équilibré.'],
+      hint: 'commencer → futur simple',
+      explanation: 'Distant/decided future → futur simple: commencer + ai = commencerai.',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t2',
+      prompt: 'She is going to call Paul tonight. (futur proche)',
+      accepted: ['Elle va appeler Paul ce soir.'],
+      hint: 'aller + appeler',
+      explanation: 'Near/planned → futur proche: elle va + infinitive (appeler).',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t3',
+      prompt: 'I am going to visit my grandparents on Wednesday. (futur proche)',
+      accepted: ['Je vais rendre visite à mes grands-parents mercredi.'],
+      hint: 'aller + rendre visite à',
+      explanation: 'Near/planned → je vais + rendre visite à mes grands-parents.',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t4',
+      prompt: 'He will exercise with his brother next summer. (futur simple)',
+      accepted: ["Il fera de l'exercice avec son frère l'été prochain."],
+      hint: 'faire → futur simple (stem fer-)',
+      explanation: 'Distant future (l\'été prochain) → futur simple: faire → il fera.',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t5',
+      prompt: 'We are going to help you with your homework. (futur proche)',
+      accepted: ["Nous allons t'aider avec tes devoirs."],
+      hint: 'aller + aider',
+      explanation: 'Near/planned → nous allons + aider.',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t6',
+      prompt: 'They will be able to speak Spanish if they practice. (futur simple)',
+      accepted: ["Ils pourront parler espagnol s'ils pratiquent régulièrement."],
+      hint: 'pouvoir → futur simple (stem pourr-)',
+      explanation: 'Conditional future (si clause) → futur simple: pouvoir → ils pourront.',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t7',
+      prompt: 'We will have a coffee in the garden tomorrow. (futur simple)',
+      accepted: ['Nous prendrons un café dans le jardin demain.'],
+      hint: 'prendre → futur simple',
+      explanation: 'Futur simple: prendre → prendrons.',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t8',
+      prompt: 'My sisters will do gymnastics with their friends. (futur simple)',
+      accepted: ['Mes sœurs feront de la gymnastique avec leurs amies.'],
+      hint: 'faire → futur simple (stem fer-)',
+      explanation: 'Futur simple: faire → elles feront.',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t9',
+      prompt: 'You (singular) will have a new computer for your birthday. (futur simple)',
+      accepted: ['Tu auras un nouvel ordinateur pour ton anniversaire.'],
+      hint: 'avoir → futur simple (stem aur-)',
+      explanation: 'Futur simple: avoir → tu auras.',
+    },
+    {
+      type: 'translate',
+      id: 'm7-t10',
+      prompt: 'You (plural) will travel to Spain. (futur simple)',
+      accepted: ['Vous voyagerez en Espagne.'],
+      hint: 'voyager → futur simple',
+      explanation: 'Futur simple: voyager → vous voyagerez.',
+    },
+  ],
+};
+
+export default module;
