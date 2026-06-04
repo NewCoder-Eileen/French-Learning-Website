@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { FillBlankExercise } from '../../content/types';
 import { checkAnswer } from '../../utils/answerCheck';
 import { FeedbackBadge } from './FeedbackBadge';
+import { AccentBar } from '../AccentBar';
 
 interface Props {
   exercise: FillBlankExercise;
@@ -14,12 +15,14 @@ export function FillBlank({ exercise, onResult }: Props) {
   const [inputs, setInputs] = useState<string[]>(Array(blankCount).fill(''));
   const [submitted, setSubmitted] = useState(false);
   const [tried, setTried] = useState(false);
+  const [focusedBlank, setFocusedBlank] = useState<number>(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     setInputs(Array(blankCount).fill(''));
     setSubmitted(false);
     setTried(false);
+    setFocusedBlank(0);
     inputRefs.current[0]?.focus();
   }, [exercise.id, blankCount]);
 
@@ -71,6 +74,7 @@ export function FillBlank({ exercise, onResult }: Props) {
               next[i] = e.target.value;
               setInputs(next);
             }}
+            onFocus={() => setFocusedBlank(i)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleSubmit();
             }}
@@ -85,11 +89,26 @@ export function FillBlank({ exercise, onResult }: Props) {
     }
   });
 
+  // Create a synthetic ref pointing to the currently focused blank for AccentBar
+  const focusedRef = { current: inputRefs.current[focusedBlank] } as React.RefObject<HTMLInputElement>;
+
   return (
     <div className="space-y-4">
       <p className="text-lg leading-relaxed text-gray-800 flex flex-wrap items-baseline gap-y-1">
         {sentenceNodes}
       </p>
+
+      {!submitted && (
+        <AccentBar
+          inputRef={focusedRef}
+          value={inputs[focusedBlank] ?? ''}
+          onChange={(val) => {
+            const next = [...inputs];
+            next[focusedBlank] = val;
+            setInputs(next);
+          }}
+        />
+      )}
 
       <p className="text-sm text-gray-500 italic">Hint: {exercise.hint}</p>
 

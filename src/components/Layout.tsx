@@ -3,9 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 interface Props {
   children: React.ReactNode;
   totalXp: number;
+  onSignOut: () => Promise<void>;
 }
 
-export function Layout({ children, totalXp }: Props) {
+export function Layout({ children, totalXp, onSignOut }: Props) {
   const loc = useLocation();
   const isHome = loc.pathname === '/';
 
@@ -40,6 +41,12 @@ export function Layout({ children, totalXp }: Props) {
                 ← Dashboard
               </Link>
             )}
+            <button
+              onClick={onSignOut}
+              className="text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
+            >
+              Sign out
+            </button>
           </div>
         </div>
       </header>

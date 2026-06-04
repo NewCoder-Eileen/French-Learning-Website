@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { TranslateExercise } from '../../content/types';
 import { checkAnswer } from '../../utils/answerCheck';
 import { FeedbackBadge } from './FeedbackBadge';
+import { AccentBar } from '../AccentBar';
 
 interface Props {
   exercise: TranslateExercise;
@@ -62,6 +63,10 @@ export function Translate({ exercise, onResult }: Props) {
         className={`w-full border-2 rounded-xl px-4 py-3 text-gray-800 outline-none
           transition-colors font-medium ${borderColor}`}
       />
+
+      {!submitted && (
+        <AccentBar inputRef={inputRef} value={value} onChange={setValue} />
+      )}
 
       <AnimatePresence>
         {submitted && (
