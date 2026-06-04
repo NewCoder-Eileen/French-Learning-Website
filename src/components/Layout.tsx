@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 interface Props {
   children: React.ReactNode;
@@ -7,8 +7,10 @@ interface Props {
 }
 
 export function Layout({ children, totalXp, onSignOut }: Props) {
-  const loc = useLocation();
-  const isHome = loc.pathname === '/';
+  const navCls = ({ isActive }: { isActive: boolean }) =>
+    `text-sm font-medium transition-colors ${
+      isActive ? 'text-french-blue' : 'text-gray-500 hover:text-gray-800'
+    }`;
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -33,14 +35,9 @@ export function Layout({ children, totalXp, onSignOut }: Props) {
               {totalXp} XP
             </div>
 
-            {!isHome && (
-              <Link
-                to="/"
-                className="text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors"
-              >
-                ← Dashboard
-              </Link>
-            )}
+            <NavLink to="/play" className={navCls}>⚔️ Play</NavLink>
+            <NavLink to="/leaderboard" className={navCls}>🏆</NavLink>
+
             <button
               onClick={onSignOut}
               className="text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
